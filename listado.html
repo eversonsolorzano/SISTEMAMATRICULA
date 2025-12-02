@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema de Matrícula Online | Listado</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/listado.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <div class="logo-icon">
+                    <i class="fas fa-graduation-cap"></i>
+                </div>
+                <h1>Sistema de Matrícula Online</h1>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Inicio</a></li>
+                    <li><a href="registro.html">Registro</a></li>
+                    <li><a href="listado.html" class="active">Listado</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <div class="page-header">
+            <h1><i class="fas fa-list"></i> Listado de Matrículas</h1>
+            <p>Gestiona y visualiza todas las matrículas registradas en el sistema.</p>
+        </div>
+
+        <div class="listado-actions">
+            <div class="search-container">
+                <div class="search-input">
+                    <i class="fas fa-search"></i>
+                    <input type="text" id="searchInput" placeholder="Buscar por nombre, curso o documento...">
+                </div>
+                <button id="searchBtn" class="btn btn-primary">
+                    <i class="fas fa-search"></i> Buscar
+                </button>
+            </div>
+            
+            <div class="filter-container">
+                <div class="filter-group">
+                    <label for="filterStatus" class="form-label">Filtrar por Estado:</label>
+                    <select id="filterStatus" class="form-select">
+                        <option value="all">Todos los estados</option>
+                        <option value="active">Activas</option>
+                        <option value="pending">Pendientes</option>
+                        <option value="completed">Completadas</option>
+                        <option value="cancelled">Canceladas</option>
+                    </select>
+                </div>
+                
+                <div class="filter-group">
+                    <label for="filterCourse" class="form-label">Filtrar por Curso:</label>
+                    <select id="filterCourse" class="form-select">
+                        <option value="all">Todos los cursos</option>
+                        <option value="matematicas">Matemáticas Avanzadas</option>
+                        <option value="ciencias">Ciencias de la Computación</option>
+                        <option value="literatura">Literatura Contemporánea</option>
+                        <option value="historia">Historia Universal</option>
+                        <option value="idiomas">Idiomas Extranjeros</option>
+                        <option value="arte">Arte y Diseño</option>
+                        <option value="administracion">Administración de Empresas</option>
+                        <option value="ingenieria">Ingeniería de Software</option>
+                    </select>
+                </div>
+                
+                <button id="clearFilters" class="btn btn-secondary">
+                    <i class="fas fa-filter"></i> Limpiar Filtros
+                </button>
+            </div>
+            
+            <div class="action-buttons">
+                <a href="registro.html" class="btn btn-success">
+                    <i class="fas fa-plus"></i> Nueva Matrícula
+                </a>
+                <button id="exportBtn" class="btn btn-primary">
+                    <i class="fas fa-file-export"></i> Exportar
+                </button>
+                <button id="printBtn" class="btn btn-secondary">
+                    <i class="fas fa-print"></i> Imprimir
+                </button>
+            </div>
+        </div>
+
+        <div class="listado-stats">
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i class="fas fa-users"></i>
+                </div>
+                <div class="stat-content">
+                    <div class="stat-number" id="totalMatriculas">0</div>
+                    <div class="stat-label">Total Matrículas</div>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i class="fas fa-check-circle"></i>
+                </div>
+                <div class="stat-content">
+                    <div class="stat-number" id="matriculasActivas">0</div>
+                    <div class="stat-label">Matrículas Activas</div>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i class="fas fa-clock"></i>
+                </div>
+                <div class="stat-content">
+                    <div class="stat-number" id="matriculasPendientes">0</div>
+                    <div class="stat-label">Matrículas Pendientes</div>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i class="fas fa-chart-line"></i>
+                </div>
+                <div class="stat-content">
+                    <div class="stat-number" id="tasaCompletamiento">0%</div>
+                    <div class="stat-label">Tasa de Completamiento</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="table-container">
+            <table id="matriculasTable" class="matriculas-table">
+                <thead>
+                    <tr>
+                        <th>
+                            <input type="checkbox" id="selectAll">
+                        </th>
+                        <th>Estudiante</th>
+                        <th>Documento</th>
+                        <th>Curso</th>
+                        <th>Modalidad</th>
+                        <th>Fecha Inicio</th>
+                        <th>Estado</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody id="matriculasBody">
+                    <!-- Las matrículas se cargarán aquí dinámicamente -->
+                </tbody>
+            </table>
+            
+            <div class="table-empty" id="emptyTableMessage">
+                <div class="empty-icon">
+                    <i class="fas fa-clipboard-list"></i>
+                </div>
+                <h3>No hay matrículas registradas</h3>
+                <p>No se encontraron matrículas que coincidan con los criterios de búsqueda.</p>
+                <a href="registro.html" class="btn btn-success">
+                    <i class="fas fa-plus"></i> Registrar Primera Matrícula
+                </a>
+            </div>
+        </div>
+
+        <div class="table-footer">
+            <div class="pagination-info">
+                Mostrando <span id="currentPageStart">0</span> - <span id="currentPageEnd">0</span> de <span id="totalItems">0</span> matrículas
+            </div>
+            <div class="pagination-controls">
+                <button id="prevPage" class="btn btn-secondary" disabled>
+                    <i class="fas fa-chevron-left"></i> Anterior
+                </button>
+                <div class="page-numbers" id="pageNumbers">
+                    <!-- Los números de página se generarán aquí dinámicamente -->
+                </div>
+                <button id="nextPage" class="btn btn-secondary">
+                    Siguiente <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
+            <div class="items-per-page">
+                <label for="itemsPerPage">Mostrar:</label>
+                <select id="itemsPerPage" class="form-select">
+                    <option value="5">5</option>
+                    <option value="10" selected>10</option>
+                    <option value="20">20</option>
+                    <option value="50">50</option>
+                </select>
+            </div>
+        </div>
+    </main>
+
+    <!-- Modal para detalles de matrícula -->
+    <div id="detailsModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2><i class="fas fa-info-circle"></i> Detalles de Matrícula</h2>
+                <button class="modal-close">&times;</button>
+            </div>
+            <div class="modal-body" id="modalBody">
+                <!-- Los detalles se cargarán aquí dinámicamente -->
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary modal-close">Cerrar</button>
+                <button id="editMatricula" class="btn btn-primary">
+                    <i class="fas fa-edit"></i> Editar
+                </button>
+                <button id="deleteMatricula" class="btn btn-danger">
+                    <i class="fas fa-trash"></i> Eliminar
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container footer-content">
+            <div class="logo">
+                <div class="logo-icon">
+                    <i class="fas fa-graduation-cap"></i>
+                </div>
+                <h2>Sistema de Matrícula Online</h2>
+            </div>
+            <div class="footer-links">
+                <a href="index.html">Inicio</a>
+                <a href="registro.html">Registro</a>
+                <a href="listado.html">Listado</a>
+                <a href="#">Términos y Condiciones</a>
+                <a href="#">Política de Privacidad</a>
+            </div>
+            <div class="copyright">
+                &copy; 2023 Sistema de Matrícula Online. Todos los derechos reservados.
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/script.js"></script>
+    <script src="js/listado.js"></script>
+</body>
+</html>

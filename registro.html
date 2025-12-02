@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema de Matrícula Online | Registro</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/registro.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <div class="logo-icon">
+                    <i class="fas fa-graduation-cap"></i>
+                </div>
+                <h1>Sistema de Matrícula Online</h1>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Inicio</a></li>
+                    <li><a href="registro.html" class="active">Registro</a></li>
+                    <li><a href="listado.html">Listado</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <div class="page-header">
+            <h1><i class="fas fa-user-plus"></i> Registro de Matrícula</h1>
+            <p>Complete el formulario para registrar una nueva matrícula en el sistema.</p>
+        </div>
+
+        <div class="alert alert-info">
+            <i class="fas fa-info-circle"></i>
+            <span>Todos los campos marcados con <span class="required">*</span> son obligatorios.</span>
+        </div>
+
+        <div class="registration-container">
+            <form id="registrationForm" class="registration-form">
+                <div class="form-section">
+                    <h2><i class="fas fa-user-graduate"></i> Datos del Estudiante</h2>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="nombres" class="form-label">Nombres <span class="required">*</span></label>
+                            <input type="text" id="nombres" class="form-control" placeholder="Ingrese los nombres" required>
+                            <div class="form-error" id="nombresError"></div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="apellidos" class="form-label">Apellidos <span class="required">*</span></label>
+                            <input type="text" id="apellidos" class="form-control" placeholder="Ingrese los apellidos" required>
+                            <div class="form-error" id="apellidosError"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="dni" class="form-label">DNI / Documento de Identidad <span class="required">*</span></label>
+                            <input type="text" id="dni" class="form-control" placeholder="Ingrese el número de documento" required>
+                            <div class="form-error" id="dniError"></div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="fechaNacimiento" class="form-label">Fecha de Nacimiento <span class="required">*</span></label>
+                            <input type="date" id="fechaNacimiento" class="form-control" required>
+                            <div class="form-error" id="fechaNacimientoError"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="email" class="form-label">Correo Electrónico <span class="required">*</span></label>
+                            <input type="email" id="email" class="form-control" placeholder="ejemplo@correo.com" required>
+                            <div class="form-error" id="emailError"></div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="telefono" class="form-label">Teléfono <span class="required">*</span></label>
+                            <input type="tel" id="telefono" class="form-control" placeholder="Ingrese su número de teléfono" required>
+                            <div class="form-error" id="telefonoError"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="direccion" class="form-label">Dirección <span class="required">*</span></label>
+                            <input type="text" id="direccion" class="form-control" placeholder="Ingrese su dirección completa" required>
+                            <div class="form-error" id="direccionError"></div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="genero" class="form-label">Género</label>
+                            <select id="genero" class="form-select">
+                                <option value="">Seleccione una opción</option>
+                                <option value="masculino">Masculino</option>
+                                <option value="femenino">Femenino</option>
+                                <option value="otro">Otro</option>
+                                <option value="prefiero-no-decir">Prefiero no decir</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="form-section">
+                    <h2><i class="fas fa-book"></i> Datos de la Matrícula</h2>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="curso" class="form-label">Curso <span class="required">*</span></label>
+                            <select id="curso" class="form-select" required>
+                                <option value="">Seleccione un curso</option>
+                                <option value="matematicas">Matemáticas Avanzadas</option>
+                                <option value="ciencias">Ciencias de la Computación</option>
+                                <option value="literatura">Literatura Contemporánea</option>
+                                <option value="historia">Historia Universal</option>
+                                <option value="idiomas">Idiomas Extranjeros</option>
+                                <option value="arte">Arte y Diseño</option>
+                                <option value="administracion">Administración de Empresas</option>
+                                <option value="ingenieria">Ingeniería de Software</option>
+                            </select>
+                            <div class="form-error" id="cursoError"></div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="modalidad" class="form-label">Modalidad <span class="required">*</span></label>
+                            <select id="modalidad" class="form-select" required>
+                                <option value="">Seleccione una modalidad</option>
+                                <option value="presencial">Presencial</option>
+                                <option value="virtual">Virtual</option>
+                                <option value="hibrida">Híbrida</option>
+                            </select>
+                            <div class="form-error" id="modalidadError"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="fechaInicio" class="form-label">Fecha de Inicio <span class="required">*</span></label>
+                            <input type="date" id="fechaInicio" class="form-control" required>
+                            <div class="form-error" id="fechaInicioError"></div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="fechaFin" class="form-label">Fecha de Fin</label>
+                            <input type="date" id="fechaFin" class="form-control">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="observaciones" class="form-label">Observaciones</label>
+                        <textarea id="observaciones" class="form-control" rows="4" placeholder="Ingrese cualquier observación adicional..."></textarea>
+                    </div>
+                    
+                    <div class="form-check">
+                        <input type="checkbox" id="terminos" class="form-check-input" required>
+                        <label for="terminos" class="form-check-label">Acepto los <a href="#">términos y condiciones</a> del sistema de matrícula <span class="required">*</span></label>
+                        <div class="form-error" id="terminosError"></div>
+                    </div>
+                </div>
+                
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-success btn-large">
+                        <i class="fas fa-save"></i> Guardar Matrícula
+                    </button>
+                    <button type="reset" class="btn btn-secondary">
+                        <i class="fas fa-redo"></i> Limpiar Formulario
+                    </button>
+                    <a href="listado.html" class="btn">
+                        <i class="fas fa-list"></i> Ver Matrículas
+                    </a>
+                </div>
+            </form>
+            
+            <div class="form-summary">
+                <div class="summary-card">
+                    <h3><i class="fas fa-clipboard-check"></i> Resumen de Matrícula</h3>
+                    <div class="summary-content">
+                        <div class="summary-item">
+                            <span class="summary-label">Estudiante:</span>
+                            <span class="summary-value" id="resumenNombres">---</span>
+                        </div>
+                        <div class="summary-item">
+                            <span class="summary-label">Documento:</span>
+                            <span class="summary-value" id="resumenDNI">---</span>
+                        </div>
+                        <div class="summary-item">
+                            <span class="summary-label">Curso:</span>
+                            <span class="summary-value" id="resumenCurso">---</span>
+                        </div>
+                        <div class="summary-item">
+                            <span class="summary-label">Modalidad:</span>
+                            <span class="summary-value" id="resumenModalidad">---</span>
+                        </div>
+                        <div class="summary-item">
+                            <span class="summary-label">Fecha Inicio:</span>
+                            <span class="summary-value" id="resumenFechaInicio">---</span>
+                        </div>
+                        <div class="summary-item">
+                            <span class="summary-label">Estado:</span>
+                            <span class="summary-badge badge-pending">Pendiente</span>
+                        </div>
+                    </div>
+                    <div class="summary-footer">
+                        <p>Complete el formulario para ver el resumen de la matrícula</p>
+                    </div>
+                </div>
+                
+                <div class="help-card">
+                    <h3><i class="fas fa-question-circle"></i> ¿Necesita ayuda?</h3>
+                    <p>Si tiene problemas para completar el formulario, consulte nuestra guía de matrícula o contacte con nuestro equipo de soporte.</p>
+                    <a href="#" class="btn btn-secondary btn-block">
+                        <i class="fas fa-file-alt"></i> Guía de Matrícula
+                    </a>
+                    <a href="#" class="btn btn-secondary btn-block">
+                        <i class="fas fa-headset"></i> Contactar Soporte
+                    </a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container footer-content">
+            <div class="logo">
+                <div class="logo-icon">
+                    <i class="fas fa-graduation-cap"></i>
+                </div>
+                <h2>Sistema de Matrícula Online</h2>
+            </div>
+            <div class="footer-links">
+                <a href="index.html">Inicio</a>
+                <a href="registro.html">Registro</a>
+                <a href="listado.html">Listado</a>
+                <a href="#">Términos y Condiciones</a>
+                <a href="#">Política de Privacidad</a>
+            </div>
+            <div class="copyright">
+                &copy; 2023 Sistema de Matrícula Online. Todos los derechos reservados.
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/script.js"></script>
+    <script src="js/registro.js"></script>
+</body>
+</html>
