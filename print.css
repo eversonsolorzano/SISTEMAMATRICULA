@@ -1,0 +1,80 @@
+/* Estilos para impresión */
+
+@media print {
+    /* Ocultar elementos no necesarios en impresión */
+    header,
+    footer,
+    .listado-actions,
+    .action-buttons-cell,
+    .table-footer,
+    .modal,
+    .btn,
+    nav {
+        display: none !important;
+    }
+    
+    /* Mostrar información de impresión */
+    .print-info {
+        display: block !important;
+        margin-bottom: 20px;
+        padding-bottom: 10px;
+        border-bottom: 1px solid #ccc;
+    }
+    
+    /* Ajustes de la tabla para impresión */
+    .table-container {
+        box-shadow: none !important;
+        border: 1px solid #ccc !important;
+    }
+    
+    .matriculas-table {
+        width: 100% !important;
+        border-collapse: collapse !important;
+    }
+    
+    .matriculas-table th,
+    .matriculas-table td {
+        border: 1px solid #ccc !important;
+        padding: 6px !important;
+    }
+    
+    .matriculas-table thead {
+        background-color: #f5f5f5 !important;
+        color: #000 !important;
+    }
+    
+    /* Ajustes de colores para impresión */
+    .badge {
+        border: 1px solid #ccc !important;
+        background-color: #f5f5f5 !important;
+        color: #000 !important;
+    }
+    
+    /* Ajustes de página */
+    body {
+        font-size: 12pt !important;
+        line-height: 1.4 !important;
+        color: #000 !important;
+        background: none !important;
+        margin: 0 !important;
+        padding: 20px !important;
+    }
+    
+    .container {
+        width: 100% !important;
+        max-width: none !important;
+        padding: 0 !important;
+        margin: 0 !important;
+    }
+    
+    /* Evitar cortes de página dentro de filas */
+    tr {
+        page-break-inside: avoid !important;
+    }
+    
+    /* Títulos */
+    h1, h2, h3 {
+        color: #000 !important;
+        margin-top: 0 !important;
+    }
+}

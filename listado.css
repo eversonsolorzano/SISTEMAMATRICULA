@@ -153,6 +153,9 @@
     font-weight: 700;
     color: var(--primary-color);
     line-height: 1;
+    min-height: 2.5rem;
+    display: flex;
+    align-items: center;
 }
 
 .stat-label {
@@ -169,6 +172,7 @@
     box-shadow: var(--shadow);
     margin-bottom: 2rem;
     animation: fadeIn 1.2s ease-out;
+    min-height: 300px;
 }
 
 .matriculas-table {
@@ -179,6 +183,9 @@
 .matriculas-table thead {
     background-color: var(--primary-color);
     color: white;
+    position: sticky;
+    top: 0;
+    z-index: 10;
 }
 
 .matriculas-table th {
@@ -186,19 +193,46 @@
     text-align: left;
     font-weight: 600;
     border-bottom: 2px solid var(--dark-color);
+    user-select: none;
+}
+
+.matriculas-table th:first-child {
+    width: 50px;
+    text-align: center;
 }
 
 .matriculas-table tbody tr {
     border-bottom: 1px solid var(--border-color);
     transition: var(--transition);
+    animation: slideInRow 0.5s ease-out;
+    animation-fill-mode: both;
+}
+
+.matriculas-table tbody tr:nth-child(1) { animation-delay: 0.1s; }
+.matriculas-table tbody tr:nth-child(2) { animation-delay: 0.2s; }
+.matriculas-table tbody tr:nth-child(3) { animation-delay: 0.3s; }
+.matriculas-table tbody tr:nth-child(4) { animation-delay: 0.4s; }
+.matriculas-table tbody tr:nth-child(5) { animation-delay: 0.5s; }
+
+@keyframes slideInRow {
+    from {
+        opacity: 0;
+        transform: translateX(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
 }
 
 .matriculas-table tbody tr:hover {
     background-color: rgba(52, 152, 219, 0.05);
+    transform: scale(1.002);
 }
 
 .matriculas-table td {
     padding: 1rem;
+    vertical-align: middle;
 }
 
 .matriculas-table td:first-child {
@@ -209,6 +243,11 @@
     width: 18px;
     height: 18px;
     cursor: pointer;
+    transition: var(--transition);
+}
+
+.matriculas-table input[type="checkbox"]:hover {
+    transform: scale(1.1);
 }
 
 /* Badges for status */
@@ -218,32 +257,42 @@
     border-radius: 20px;
     font-size: 0.85rem;
     font-weight: 600;
+    transition: var(--transition);
+}
+
+.badge:hover {
+    transform: scale(1.05);
 }
 
 .badge-active {
     background-color: rgba(46, 204, 113, 0.1);
     color: var(--success-color);
+    border: 1px solid rgba(46, 204, 113, 0.2);
 }
 
 .badge-pending {
     background-color: rgba(243, 156, 18, 0.1);
     color: var(--warning-color);
+    border: 1px solid rgba(243, 156, 18, 0.2);
 }
 
 .badge-completed {
     background-color: rgba(52, 152, 219, 0.1);
     color: var(--secondary-color);
+    border: 1px solid rgba(52, 152, 219, 0.2);
 }
 
 .badge-cancelled {
     background-color: rgba(231, 76, 60, 0.1);
     color: var(--danger-color);
+    border: 1px solid rgba(231, 76, 60, 0.2);
 }
 
 /* Action buttons in table */
 .action-buttons-cell {
     display: flex;
     gap: 0.5rem;
+    justify-content: flex-start;
 }
 
 .action-btn {
@@ -256,6 +305,7 @@
     justify-content: center;
     cursor: pointer;
     transition: var(--transition);
+    font-size: 0.9rem;
 }
 
 .action-btn-view {
@@ -274,7 +324,23 @@
 }
 
 .action-btn:hover {
-    transform: scale(1.1);
+    transform: translateY(-2px) scale(1.1);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.action-btn-view:hover {
+    background-color: var(--secondary-color);
+    color: white;
+}
+
+.action-btn-edit:hover {
+    background-color: var(--success-color);
+    color: white;
+}
+
+.action-btn-delete:hover {
+    background-color: var(--danger-color);
+    color: white;
 }
 
 /* Empty table message */
@@ -282,17 +348,24 @@
     padding: 3rem 2rem;
     text-align: center;
     display: none;
+    animation: fadeIn 0.5s ease-out;
 }
 
 .table-empty.show {
     display: block;
-    animation: fadeIn 0.5s ease-out;
 }
 
 .empty-icon {
     font-size: 4rem;
     color: var(--border-color);
     margin-bottom: 1.5rem;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); opacity: 0.7; }
+    50% { transform: scale(1.1); opacity: 1; }
+    100% { transform: scale(1); opacity: 0.7; }
 }
 
 .table-empty h3 {
@@ -304,6 +377,9 @@
 .table-empty p {
     color: #666;
     margin-bottom: 1.5rem;
+    max-width: 400px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 /* Table footer */
@@ -322,17 +398,20 @@
 
 .pagination-info {
     color: var(--dark-color);
+    font-size: 0.9rem;
 }
 
 .pagination-controls {
     display: flex;
     align-items: center;
     gap: 0.5rem;
+    flex-wrap: wrap;
 }
 
 .page-numbers {
     display: flex;
     gap: 0.3rem;
+    flex-wrap: wrap;
 }
 
 .page-btn {
@@ -346,22 +425,44 @@
     border-radius: 4px;
     cursor: pointer;
     transition: var(--transition);
+    font-size: 0.9rem;
 }
 
 .page-btn:hover {
     background-color: #f5f5f5;
+    border-color: var(--secondary-color);
 }
 
 .page-btn.active {
     background-color: var(--secondary-color);
     color: white;
     border-color: var(--secondary-color);
+    font-weight: 600;
+}
+
+.page-dots {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    color: #666;
 }
 
 .items-per-page {
     display: flex;
     align-items: center;
     gap: 0.5rem;
+}
+
+.items-per-page label {
+    font-size: 0.9rem;
+    color: var(--dark-color);
+}
+
+.items-per-page .form-select {
+    width: auto;
+    min-width: 70px;
 }
 
 /* Modal */
@@ -377,6 +478,7 @@
     justify-content: center;
     align-items: center;
     animation: fadeIn 0.3s ease-out;
+    padding: 1rem;
 }
 
 .modal.show {
@@ -393,6 +495,7 @@
     display: flex;
     flex-direction: column;
     animation: slideInUp 0.3s ease-out;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
 }
 
 @keyframes slideInUp {
@@ -405,8 +508,9 @@
     justify-content: space-between;
     align-items: center;
     padding: 1.5rem;
-    background-color: var(--primary-color);
+    background: linear-gradient(135deg, var(--primary-color), var(--dark-color));
     color: white;
+    flex-shrink: 0;
 }
 
 .modal-header h2 {
@@ -414,6 +518,7 @@
     display: flex;
     align-items: center;
     gap: 10px;
+    margin: 0;
 }
 
 .modal-close {
@@ -423,9 +528,16 @@
     color: white;
     cursor: pointer;
     transition: var(--transition);
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4px;
 }
 
 .modal-close:hover {
+    background-color: rgba(255, 255, 255, 0.1);
     color: var(--accent-color);
 }
 
@@ -441,6 +553,148 @@
     gap: 1rem;
     padding: 1.5rem;
     border-top: 1px solid var(--border-color);
+    flex-shrink: 0;
+}
+
+/* Details in modal */
+.details-container {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.details-section {
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    padding: 1.5rem;
+    border-left: 4px solid var(--secondary-color);
+}
+
+.details-section:nth-child(2) {
+    border-left-color: var(--accent-color);
+}
+
+.details-section h3 {
+    font-size: 1.2rem;
+    color: var(--primary-color);
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.details-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 1rem;
+}
+
+.detail-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+}
+
+.detail-item.full-width {
+    grid-column: 1 / -1;
+}
+
+.detail-label {
+    font-weight: 600;
+    color: var(--dark-color);
+    font-size: 0.9rem;
+}
+
+.detail-value {
+    color: var(--text-color);
+    word-break: break-word;
+}
+
+/* Success message */
+.success-message {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background-color: var(--success-color);
+    color: white;
+    padding: 1rem 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    z-index: 1000;
+    animation: slideInTop 0.5s ease-out, fadeOut 0.5s ease-out 4s forwards;
+}
+
+@keyframes slideInTop {
+    from { transform: translateY(-100%); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes fadeOut {
+    to { opacity: 0; transform: translateY(-20px); }
+}
+
+/* Loading animation */
+.loading {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border: 3px solid rgba(52, 152, 219, 0.3);
+    border-radius: 50%;
+    border-top-color: var(--secondary-color);
+    animation: spin 1s ease-in-out infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* Column sorting */
+.sortable {
+    cursor: pointer;
+    position: relative;
+    padding-right: 25px !important;
+}
+
+.sortable:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.sortable::after {
+    content: '↕';
+    position: absolute;
+    right: 10px;
+    opacity: 0.5;
+    transition: var(--transition);
+}
+
+.sortable.asc::after {
+    content: '↑';
+    opacity: 1;
+}
+
+.sortable.desc::after {
+    content: '↓';
+    opacity: 1;
+}
+
+/* Checkbox selection animation */
+.matricula-checkbox:checked {
+    animation: checkAnim 0.3s ease-out;
+}
+
+@keyframes checkAnim {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.2); }
+    100% { transform: scale(1); }
+}
+
+/* Row selection */
+.matriculas-table tbody tr.selected {
+    background-color: rgba(52, 152, 219, 0.1);
+    border-left: 3px solid var(--secondary-color);
 }
 
 /* Responsive */
@@ -458,6 +712,10 @@
         align-items: stretch;
     }
     
+    .filter-group {
+        min-width: 100%;
+    }
+    
     .action-buttons {
         justify-content: center;
     }
@@ -465,6 +723,21 @@
     .matriculas-table {
         display: block;
         overflow-x: auto;
+    }
+    
+    .matriculas-table th,
+    .matriculas-table td {
+        white-space: nowrap;
+        min-width: 120px;
+    }
+    
+    .action-buttons-cell {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    
+    .details-grid {
+        grid-template-columns: 1fr;
     }
     
     .table-footer {
@@ -475,5 +748,55 @@
     .pagination-controls {
         flex-wrap: wrap;
         justify-content: center;
+    }
+    
+    .modal-content {
+        width: 95%;
+    }
+    
+    .modal-footer {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    
+    .modal-footer .btn {
+        flex: 1;
+        min-width: 120px;
+    }
+}
+
+@media (max-width: 480px) {
+    .page-header h1 {
+        font-size: 1.5rem;
+    }
+    
+    .stat-card {
+        flex-direction: column;
+        text-align: center;
+        padding: 1rem;
+    }
+    
+    .stat-icon {
+        font-size: 2rem;
+        margin-bottom: 0.5rem;
+    }
+    
+    .stat-number {
+        font-size: 1.5rem;
+        justify-content: center;
+    }
+    
+    .action-buttons {
+        flex-direction: column;
+        width: 100%;
+    }
+    
+    .action-buttons .btn {
+        width: 100%;
+    }
+    
+    .matriculas-table td:nth-child(3),
+    .matriculas-table th:nth-child(3) {
+        display: none;
     }
 }
